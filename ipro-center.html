@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iPro Center — iPhone · Venta · Reparación · Canje</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --offblack: #080808;
+      --surface: #111111;
+      --surface2: #1A1A1A;
+      --border: rgba(255, 255, 255, 0.07);
+      --border-strong: rgba(255, 255, 255, 0.12);
+      --white: #FFFFFF;
+      --grey-1: #F0F0F0;
+      --grey-2: #D1D1D1;
+      --grey-3: #A0A0A0;
+      --grey-4: #666666;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 110%;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0.3rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s;
+    }
+
+    nav.nav-hidden {
+      transform: translateY(-100%);
+    }
+
+    .nav-logo img {
+      height: 75px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--grey-2);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    .hero-left {
+      padding: 9rem 3rem 5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 2.5rem;
+      height: 1px;
+      background: var(--grey-3);
+      flex-shrink: 0;
+    }
+
+    .hero-title {
+      font-size: clamp(3.2rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: var(--white);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.4s forwards;
+    }
+
+    .hero-title .dim {
+      color: var(--grey-2);
+      font-weight: 200;
+    }
+
+    .hero-sub {
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--grey-2);
+      max-width: 36ch;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.6s forwards;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.8s forwards;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.9rem 2.2rem;
+      background: var(--white);
+      color: var(--black);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 700;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .btn-primary:hover {
+      background: var(--grey-1);
+    }
+
+    .btn-ghost {
+      display: inline-block;
+      padding: 0.9rem 2.2rem;
+      border: 1px solid var(--border-strong);
+      color: var(--grey-2);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.25s, color 0.25s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--white);
+      color: var(--white);
+    }
+
+    .hero-right {
+      position: relative;
+      height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-phones {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+    }
+
+    .phone-wrapper-16 {
+      position: absolute;
+      right: 4%;
+      top: 55%;
+      height: 80%;
+      max-width: 42vw;
+      transform: translateY(-50%);
+      transition: transform 0.15s ease-out;
+      z-index: 2;
+    }
+
+    .phone-img-16 {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+      opacity: 0;
+      animation: slideIn16 1.1s ease 0.5s forwards;
+      filter: drop-shadow(-15px 25px 35px rgba(0, 0, 0, 0.6));
+    }
+
+    .phone-wrapper-17 {
+      position: absolute;
+      right: 28%;
+      top: 55%;
+      height: 70%;
+      max-width: 35vw;
+      transform: translateY(-50%);
+      transition: transform 0.15s ease-out;
+      z-index: 1;
+    }
+
+    .phone-img-17 {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+      opacity: 0;
+      animation: slideIn17 1.1s ease 0.8s forwards;
+      filter: drop-shadow(-15px 25px 35px rgba(0, 0, 0, 0.6));
+    }
+
+    @keyframes slideIn16 {
+      from {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideIn17 {
+      from {
+        opacity: 0;
+        transform: translateX(60px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* ── MOBILE HERO ── */
+    @media (max-width: 768px) {
+      #hero {
+        display: block;
+        min-height: 100svh;
+        position: relative;
+        padding: 0;
+      }
+
+      .hero-right {
+        display: block;
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        opacity: 0.35;
+        margin-bottom: 0;
+      }
+      
+      .hero-right::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.95) 100%);
+        z-index: 3;
+      }
+
+      .hero-left {
+        position: relative;
+        z-index: 4;
+        height: 100%;
+        min-height: 100svh;
+        padding: 6rem 1.5rem 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .hero-eyebrow {
+        justify-content: flex-start;
+      }
+
+      .hero-eyebrow::before {
+        display: block;
+      }
+
+      .hero-title {
+        font-size: clamp(2.8rem, 13vw, 4.5rem);
+      }
+
+      .hero-sub {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .hero-cta-row {
+        justify-content: flex-start;
+      }
+
+      .phone-wrapper-16 {
+        right: -15%;
+        top: 55%;
+        height: 85%;
+        max-width: 70vw;
+        transform: translateY(-50%);
+      }
+
+      .phone-wrapper-17 {
+        right: 35%;
+        top: 60%;
+        height: 75%;
+        max-width: 55vw;
+        transform: translateY(-50%);
+      }
+    }
+
+    /* ── SECTION SHARED ── */
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--grey-3);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 4rem;
+    }
+
+    .section-title .dim {
+      font-weight: 200;
+      color: var(--grey-2);
+    }
+
+    .rule {
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── CATALOG ── */
+    #catalog {
+      background: var(--offblack);
+    }
+
+    .catalog-filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 3.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.45rem 1.1rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--grey-3);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      border-color: var(--white);
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .catalog-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .catalog-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .catalog-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: var(--surface2);
+    }
+    
+    .catalog-item:hover {
+      border-color: var(--white);
+    }
+
+    .catalog-item::before {
+      display: none;
+    }
+
+    .item-model {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
+    }
+
+    .item-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .item-spec-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.48rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey-2);
+      padding: 0.2rem 0.55rem;
+      border: 1px solid var(--border-strong);
+    }
+
+    .item-price-col {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .item-price {
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      display: block;
+    }
+
+    .item-condition {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.45rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.45rem;
+      border: 1px solid;
+      display: inline-block;
+      margin-top: 0.4rem;
+    }
+
+    .cond-A {
+      border-color: var(--white);
+      color: var(--white);
+    }
+
+    .cond-B {
+      border-color: var(--grey-2);
+      color: var(--grey-2);
+    }
+
+    .cond-C {
+      border-color: var(--grey-3);
+      color: var(--grey-3);
+    }
+
+    /* ── CANJE ── */
+    #canje {
+      background: var(--surface);
+    }
+
+    .step {
+      display: none;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    .step-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.3em;
+      color: var(--grey-3);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .step-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+
+    .form-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 0.9rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.25s;
+      -webkit-appearance: none;
+      border-radius: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--white);
+    }
+
+    .form-select option {
+      background: var(--surface2);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .battery-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--white);
+      text-align: center;
+      margin: 0.8rem 0;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 1px;
+      background: var(--border-strong);
+      outline: none;
+      margin-bottom: 1.5rem;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      background: var(--white);
+      cursor: pointer;
+      border-radius: 0;
+    }
+
+    .battery-guide {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.47rem;
+      letter-spacing: 0.08em;
+      color: var(--grey-3);
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+
+    .step-progress {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .progress-dot {
+      height: 1px;
+      flex: 1;
+      background: var(--border-strong);
+      transition: background 0.4s;
+    }
+
+    .progress-dot.done {
+      background: var(--white);
+    }
+
+    .btn-step-back {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--grey-3);
+      padding: 0.75rem 1.8rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-step-back:hover {
+      border-color: var(--white);
+      color: var(--white);
+    }
+
+    .btn-step-next {
+      background: var(--white);
+      border: none;
+      color: var(--black);
+      padding: 0.9rem 2.2rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-step-next:hover {
+      background: var(--grey-1);
+    }
+
+    .step-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    #summary-box {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      line-height: 1.9;
+      color: var(--grey-2);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 1.3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── SERVICES ── */
+    #servicios {
+      background: var(--offblack);
+    }
+
+    .service-row {
+      display: grid;
+      grid-template-columns: 3rem 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    .service-row:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .service-row:hover .service-action {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .service-action {
+      opacity: 0;
+      transform: translateX(10px);
+      transition: all 0.3s ease;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--white);
+      padding: 0.6rem 1.2rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* MODAL */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: var(--surface);
+      padding: 2.5rem;
+      width: 90%;
+      max-width: 450px;
+      border: 1px solid var(--border);
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s;
+    }
+
+    .modal.active .modal-content {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .wpp-input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      margin-bottom: 1.2rem;
+      margin-top: 0.4rem;
+    }
+
+    .wpp-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--grey-3);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .service-index {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.48rem;
+      letter-spacing: 0.1em;
+      color: var(--grey-3);
+    }
+
+    .service-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .service-detail {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.45rem;
+      color: var(--grey-3);
+      margin-top: 0.25rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .acc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .acc-name {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--grey-2);
+    }
+
+    .acc-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.43rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.5rem;
+    }
+
+    /* ── FAQ ── */
+    #faq {
+      background: var(--surface);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-q {
+      width: 100%;
+      background: transparent;
+      border: none;
+      text-align: left;
+      padding: 1.6rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      gap: 1rem;
+    }
+
+    .faq-q-text {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    .faq-icon {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.1rem;
+      color: var(--white);
+      flex-shrink: 0;
+      transition: transform 0.3s;
+      line-height: 1;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-a p {
+      font-size: 0.82rem;
+      line-height: 1.75;
+      color: var(--grey-2);
+      font-weight: 300;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 5rem 2rem 7rem;
+      border-top: 1px solid var(--border);
+      background: var(--black);
+    }
+
+    .footer-logo img {
+      height: 60px;
+      display: block;
+      margin-bottom: 3.5rem;
+      opacity: 1;
+      border-radius: 4px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem 2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .footer-col-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.45rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+      margin-bottom: 1rem;
+    }
+
+    .footer-col p,
+    .footer-col a {
+      font-size: 0.82rem;
+      color: var(--grey-2);
+      font-weight: 300;
+      line-height: 1.9;
+      display: block;
+      text-decoration: none;
+    }
+
+    .footer-col a:hover {
+      color: var(--white);
+    }
+
+    .footer-maps-link {
+      font-family: 'Space Mono', monospace !important;
+      font-size: 0.45rem !important;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--grey-2) !important;
+      margin-top: 0.8rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.43rem;
+      letter-spacing: 0.2em;
+      color: var(--grey-3);
+      text-transform: uppercase;
+    }
+
+    .footer-social a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.48rem;
+      letter-spacing: 0.2em;
+      color: var(--grey-3);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.25s;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+    }
+
+    .footer-social a:hover {
+      color: var(--white);
+      border-color: var(--white);
+    }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wa-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 1.5rem;
+      z-index: 99;
+      width: 3rem;
+      height: 3rem;
+      background: var(--black);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: border-color 0.25s, background 0.25s;
+    }
+
+    .wa-float:hover {
+      border-color: var(--white);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .wa-float svg {
+      width: 1.2rem;
+      height: 1.2rem;
+      fill: var(--white);
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── MOBILE NAV ── */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      position: relative;
+      z-index: 101;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--white);
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        position: fixed;
+        inset: 0;
+        background: var(--black);
+        align-items: center;
+        justify-content: center;
+        z-index: 99;
+      }
+
+      .nav-links.open a {
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      section {
+        padding: 3.5rem 1.5rem;
+      }
+
+      .service-row {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--surface2);
+        cursor: default;
+      }
+
+      .service-row:hover {
+        background: var(--surface2);
+      }
+
+      .service-row:hover .service-action {
+        opacity: 1;
+        transform: none;
+      }
+
+      .service-index {
+        display: none;
+      }
+
+      .service-action {
+        opacity: 1;
+        transform: none;
+        width: 100%;
+        margin-top: 0.5rem;
+        padding: 0.9rem;
+        text-align: center;
+        font-family: 'Space Mono', monospace;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--black);
+        background: var(--white);
+        border: none;
+        cursor: pointer;
+      }
+
+      /* MODAL */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+      }
+
+      .modal.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-content {
+        background: var(--surface);
+        padding: 2.5rem;
+        width: 90%;
+        max-width: 450px;
+        border: 1px solid var(--border);
+        position: relative;
+        transform: translateY(20px);
+        transition: transform 0.3s;
+      }
+
+      .modal.active .modal-content {
+        transform: translateY(0);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        color: var(--white);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      .wpp-input {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--white);
+        font-family: 'Space Mono', monospace;
+        font-size: 0.65rem;
+        margin-bottom: 1.2rem;
+        margin-top: 0.4rem;
+      }
+
+      .wpp-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.55rem;
+        color: var(--grey-3);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar {
+      width: 2px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--black);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--grey-4);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo"><img src="LOGO sin fondo.png" alt="iPro Center"></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#catalog" onclick="closeMenu()">Catálogo</a></li>
+      <li><a href="#canje" onclick="closeMenu()">Canje</a></li>
+      <li><a href="#servicios" onclick="closeMenu()">Servicios</a></li>
+      <li><a href="#faq" onclick="closeMenu()">FAQ</a></li>
+      <li><a href="#contacto" onclick="closeMenu()">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Córdoba / Apple Specialist</p>
+      <h1 class="hero-title">
+        iPhone.<br>
+        <span class="dim">Elegido</span><br>
+        correctamente.
+      </h1>
+      <p class="hero-sub">Sin intermediarios. Sin incertidumbre. Equipos nuevos y usados con garantía, servicio técnico
+        especializado y canje inteligente.</p>
+      <div class="hero-cta-row">
+        <a href="#catalog" class="btn-primary">Ver stock</a>
+        <a href="#canje" class="btn-ghost">Cotizar mi iPhone</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-phones">
+        <div class="phone-wrapper-17">
+          <img class="phone-img-17" src="IPHONE 17.png" alt="iPhone 17">
+        </div>
+        <div class="phone-wrapper-16">
+          <img class="phone-img-16" src="IPHONE 16 PRO.png" alt="iPhone 16 Pro">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- CATALOG -->
+  <section id="catalog">
+    <p class="section-label reveal" style="text-transform: none;">Stock disponible actualizado en tiempo real</p>
+    <h2 class="section-title reveal">Elegí tu<br><span class="dim">próximo iPhone.</span></h2>
+    <div class="catalog-filters reveal">
+      <button class="filter-btn active" data-filter="usados">Usados</button>
+      <button class="filter-btn" data-filter="nuevos">Nuevos Sellados</button>
+    </div>
+    <div class="catalog-list reveal" id="catalogList"></div>
+    <p style="font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.15em;color:var(--grey-3);margin-top:2.5rem;text-transform:uppercase;"
+      class="reveal">
+      * Precios en USD. Stock sujeto a disponibilidad. Actualización diaria.
+    </p>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- CANJE -->
+  <section id="canje">
+    <p class="section-label reveal">Plan Canje — Valoración en tiempo real</p>
+    <h2 class="section-title reveal">Tu iPhone<br><span class="dim">vale más</span><br>de lo que creés.</h2>
+    <p class="reveal"
+      style="font-size:0.82rem;color:var(--grey-2);font-weight:300;line-height:1.75;max-width:40ch;margin-bottom:3.5rem;">
+      Completá el formulario. Recibís una valoración real en menos de 24 horas. Sin sorteos. Sin letra chica.
+    </p>
+
+    <div class="reveal" style="max-width:540px;">
+      <div class="step-progress">
+        <div class="progress-dot done" id="dot1"></div>
+        <div class="progress-dot" id="dot2"></div>
+        <div class="progress-dot" id="dot3"></div>
+        <div class="progress-dot" id="dot4"></div>
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step active" id="step1">
+        <p class="step-num">01 / 04 — Modelo actual</p>
+        <h3 class="step-title">¿Cuál es tu iPhone?</h3>
+        <label class="form-label" for="currentModel">Modelo</label>
+        <select class="form-select" id="currentModel">
+          <option value="">— Seleccioná tu modelo —</option>
+          <option>iPhone 7</option>
+          <option>iPhone 7 Plus</option>
+          <option>iPhone 8</option>
+          <option>iPhone 8 Plus</option>
+          <option>iPhone X</option>
+          <option>iPhone XS</option>
+          <option>iPhone XS Max</option>
+          <option>iPhone XR</option>
+          <option>iPhone 11</option>
+          <option>iPhone 11 Pro</option>
+          <option>iPhone 11 Pro Max</option>
+          <option>iPhone 12</option>
+          <option>iPhone 12 Mini</option>
+          <option>iPhone 12 Pro</option>
+          <option>iPhone 12 Pro Max</option>
+          <option>iPhone 13</option>
+          <option>iPhone 13 Mini</option>
+          <option>iPhone 13 Pro</option>
+          <option>iPhone 13 Pro Max</option>
+          <option>iPhone 14</option>
+          <option>iPhone 14 Plus</option>
+          <option>iPhone 14 Pro</option>
+          <option>iPhone 14 Pro Max</option>
+          <option>iPhone 15</option>
+          <option>iPhone 15 Plus</option>
+          <option>iPhone 15 Pro</option>
+          <option>iPhone 15 Pro Max</option>
+        </select>
+        <label class="form-label" for="currentStorage">Almacenamiento</label>
+        <select class="form-select" id="currentStorage">
+          <option value="">— Capacidad —</option>
+          <option>64 GB</option>
+          <option>128 GB</option>
+          <option>256 GB</option>
+          <option>512 GB</option>
+          <option>1 TB</option>
+        </select>
+        <div class="step-nav"><span></span><button class="btn-step-next" onclick="nextStep(1)">Continuar</button></div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step" id="step2">
+        <p class="step-num">02 / 04 — Salud de batería</p>
+        <h3 class="step-title">¿Cuánto retiene la batería?</h3>
+        <label class="form-label">Salud de batería (Ajustes → Batería)</label>
+        <div class="battery-num" id="batteryValue">85%</div>
+        <input type="range" id="batterySlider" min="60" max="100" value="85"
+          oninput="document.getElementById('batteryValue').textContent = this.value + '%'">
+        <p class="battery-guide">&gt; 85% Óptima · 75–85% Aceptable · &lt; 75% Reemplazo recomendado</p>
+        <div class="step-nav">
+          <button class="btn-step-back" onclick="prevStep(2)">Volver</button>
+          <button class="btn-step-next" onclick="nextStep(2)">Continuar</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step" id="step3">
+        <p class="step-num">03 / 04 — Estado estético</p>
+        <h3 class="step-title">¿Cómo está el exterior?</h3>
+        <label class="form-label" for="aestheticCondition">Condición</label>
+        <select class="form-select" id="aestheticCondition">
+          <option value="">— Seleccioná —</option>
+          <option value="A">Grado A — Sin marcas visibles</option>
+          <option value="B">Grado B — Marcas leves de uso</option>
+          <option value="C">Grado C — Rayones / golpes visibles</option>
+          <option value="D">Grado D — Pantalla rota / daño severo</option>
+        </select>
+        <label class="form-label" for="aestheticNotes">Detalles adicionales (opcional)</label>
+        <textarea class="form-textarea" id="aestheticNotes"
+          placeholder="Describí cualquier detalle: cámara, marco, botones..."></textarea>
+        <div class="step-nav">
+          <button class="btn-step-back" onclick="prevStep(3)">Volver</button>
+          <button class="btn-step-next" onclick="nextStep(3)">Continuar</button>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step" id="step4">
+        <p class="step-num">04 / 04 — iPhone deseado</p>
+        <h3 class="step-title">¿A qué modelo querés actualizar?</h3>
+        <label class="form-label" for="desiredModel">Modelo deseado</label>
+        <select class="form-select" id="desiredModel">
+          <option value="">— Seleccioná —</option>
+          <option>iPhone 14</option>
+          <option>iPhone 14 Pro</option>
+          <option>iPhone 14 Pro Max</option>
+          <option>iPhone 15</option>
+          <option>iPhone 15 Plus</option>
+          <option>iPhone 15 Pro</option>
+          <option>iPhone 15 Pro Max</option>
+          <option>Todavía no lo sé</option>
+        </select>
+        <label class="form-label" for="contactName">Tu nombre</label>
+        <input type="text" class="form-input" id="contactName" placeholder="Nombre completo">
+        <div id="summary-box" style="display:none;"></div>
+        <div class="step-nav">
+          <button class="btn-step-back" onclick="prevStep(4)">Volver</button>
+          <button class="btn-step-next" onclick="sendToWhatsApp()" style="background:var(--white);color:var(--black);">
+            Solicitar valoración
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- SERVICES -->
+  <section id="servicios">
+    <p class="section-label reveal">Servicios — Técnicos y Accesorios</p>
+    <h2 class="section-title reveal">Servicio Técnico<br><span class="dim">Especializado.</span></h2>
+    <div class="reveal">
+      <div class="service-row" onclick="openWppForm('Cambio de Batería')">
+        <span class="service-index">01</span>
+        <div>
+          <p class="service-name">Cambio de Batería</p>
+          <p class="service-detail">Batería OEM / Compatible · Entrega en 24h</p>
+        </div>
+        <button class="service-action">Pedir Cotización</button>
+      </div>
+      <div class="service-row" onclick="openWppForm('Cambio de Módulo')">
+        <span class="service-index">02</span>
+        <div>
+          <p class="service-name">Cambio de Módulo</p>
+          <p class="service-detail">Módulo original · Calibración táctil incluida</p>
+        </div>
+        <button class="service-action">Pedir Cotización</button>
+      </div>
+      <div class="service-row" onclick="openWppForm('Cambio de Cámaras')">
+        <span class="service-index">03</span>
+        <div>
+          <p class="service-name">Cambio de Cámaras</p>
+          <p class="service-detail">Lente / Sensor / Estabilizador</p>
+        </div>
+        <button class="service-action">Pedir Cotización</button>
+      </div>
+      <div class="service-row" onclick="openWppForm('Micrófono - Parlante')">
+        <span class="service-index">04</span>
+        <div>
+          <p class="service-name">Micrófono - Parlante</p>
+          <p class="service-detail">Reparación de audio integral</p>
+        </div>
+        <button class="service-action">Pedir Cotización</button>
+      </div>
+      <div class="service-row" onclick="openWppForm('Pin de Carga')">
+        <span class="service-index">05</span>
+        <div>
+          <p class="service-name">Pin de Carga</p>
+          <p class="service-detail">Lightning / USB-C · Prueba de carga incluida</p>
+        </div>
+        <button class="service-action">Pedir Cotización</button>
+      </div>
+      <div class="service-row" onclick="openWppForm('Software')">
+        <span class="service-index">06</span>
+        <div>
+          <p class="service-name">Software</p>
+          <p class="service-detail">Diagnóstico · Backup · Actualizaciones</p>
+        </div>
+        <button class="service-action">Pedir Cotización</button>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:4rem;">
+      <h3
+        style="font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; color: var(--white); margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
+        Accesorios Certificados<span style="display:block; flex:1; height:1px; background:var(--border);"></span></h3>
+      <div class="acc-item"><span class="acc-name">Funda MagSafe — Silicona premium</span><span
+          class="acc-badge">Stock</span></div>
+      <div class="acc-item"><span class="acc-name">Vidrio templado 2.5D — Antihuella</span><span
+          class="acc-badge">Stock</span></div>
+      <div class="acc-item"><span class="acc-name">Cargador USB-C 20W — Apple original</span><span
+          class="acc-badge">Stock</span></div>
+      <div class="acc-item"><span class="acc-name">Cable USB-C a Lightning — Trenzado</span><span
+          class="acc-badge">Stock</span></div>
+      <div class="acc-item"><span class="acc-name">AirPods Pro 2da gen — Sellados</span><span
+          class="acc-badge">Consultar</span></div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <p class="section-label reveal">FAQ — Preguntas frecuentes</p>
+    <h2 class="section-title reveal">Todo lo que<br><span class="dim">necesitás saber.</span></h2>
+    <div class="reveal">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">¿Qué garantía tienen los equipos vendidos?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Todos los equipos de grado A y B incluyen 90 días de garantía sobre fallas de funcionamiento. No cubre
+            daños físicos posteriores a la compra. Entregamos comprobante con número de serie y condición.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">¿Cuánto demora una reparación?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Las reparaciones estándar (batería, pantalla, conector) se realizan en el día, entre 2 y 4 horas hábiles.
+            Reparaciones de placa o módulos de cámara pueden demorar hasta 48 horas. Te avisamos por WhatsApp cuando el
+            equipo está listo.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">¿Cómo funciona el plan de canje?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Completás el formulario de valoración, recibís una oferta por WhatsApp en menos de 24 horas. Si acordamos
+            precio, traés tu equipo al local, verificamos condiciones y realizamos el canje o la diferencia en efectivo
+            o transferencia. Sin costos ocultos.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">¿Qué métodos de pago aceptan?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Aceptamos efectivo en pesos y dólares, transferencia bancaria (CVU/CBU), Mercado Pago y criptomonedas
+            estables (USDT). Para compras en cuotas consultá disponibilidad según el equipo.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">¿Los equipos son libres de iCloud?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Sí. Todos los equipos se verifican libres de iCloud antes de la venta. Podés verificarlo con tu propio
+            Apple ID en el momento de la transacción, sin apuro.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">¿Realizan envíos a todo el país?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Sí. Coordinamos envíos por Andreani o OCA a todo el territorio nacional. El costo lo abona el comprador.
+            Para reparaciones solo atendemos de forma presencial.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- FOOTER -->
+  <footer id="contacto">
+    <div class="footer-grid reveal">
+      <div class="footer-col">
+        <p class="footer-col-title">Ubicación</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3405.0063266185845!2d-64.190825!3d-31.4139943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432987fb0727507%3A0xc6ebfb93a62024ce!2sGral.%20Sim%C3%B3n%20Bol%C3%ADvar%2030%2C%20X5000%20C%C3%B3rdoba!5e0!3m2!1ses-419!2sar!4v1700000000000!5m2!1ses-419!2sar" width="100%" height="180" style="border:0; border-radius: 4px; margin-bottom: 1rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <a href="https://maps.google.com/?q=Gral.+Simón+Bolívar+30,+Córdoba" target="_blank" rel="noopener" style="margin-bottom: 0.5rem; display: block;">
+          Gral. Simón Bolívar 30<br>X5010 Córdoba<br>Argentina
+        </a>
+        <a class="footer-maps-link" href="https://maps.google.com/?q=Gral.+Simón+Bolívar+30,+Córdoba" target="_blank"
+          rel="noopener">Ver en Google Maps →</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Horarios</p>
+        <p>Lun a Jue<br><strong style="font-weight:500;color:var(--white);">10:00 – 18:00</strong></p>
+        <p style="margin-top:0.5rem;">Viernes<br><span style="color:var(--grey-3);">Consultar</span></p>
+        <p style="margin-top:0.5rem;">Sáb / Dom<br><span style="color:var(--grey-3);">Cerrado</span></p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Contacto</p>
+        <a href="https://wa.me/5493515185799" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="tel:03515185799">0351 518-5799</a>
+        <a href="https://www.instagram.com/iprocenter.ar/" target="_blank" rel="noopener">@iprocenter.ar</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Legal</p>
+        <p>Empresa registrada en Argentina. Todos los precios en USD. Stock sujeto a disponibilidad. CUIT disponible a
+          solicitud.</p>
+      </div>
+    </div>
+    <div class="footer-bottom reveal">
+      <span class="footer-copy">© 2025 iPro Center. Todos los derechos reservados.</span>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/iprocenter.ar/" target="_blank" rel="noopener">IG ↗</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/5493515185799" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  </a>
+
+  <script>
+    const STOCK = [
+      { type: "usados", model: "iPhone 13", storage: "128GB", color: "Midnight", battery: "86%", priceUSD: "$340", priceARS: "$482.800" },
+      { type: "usados", model: "iPhone 13", storage: "128GB", color: "Green", battery: "86%", priceUSD: "$340", priceARS: "$482.800" },
+      { type: "usados", model: "iPhone 14", storage: "128GB", color: "Midnight", battery: "90%", priceUSD: "$420", priceARS: "$596.400" },
+      { type: "usados", model: "iPhone 14 Pro Max", storage: "128GB", color: "Space Black", battery: "100%", priceUSD: "$580", priceARS: "$823.600" },
+      { type: "usados", model: "iPhone 15 Pro", storage: "128GB", color: "Blue", battery: "86%", priceUSD: "$610", priceARS: "$866.200" },
+      { type: "usados", model: "iPhone 16 Pro", storage: "128GB", color: "Space Black", battery: "96%", priceUSD: "$800", priceARS: "$1.136.000" },
+      { type: "usados", model: "iPhone 16 Pro Max", storage: "256GB", color: "Space Black", battery: "92%", priceUSD: "$950", priceARS: "$1.349.000" },
+
+      { type: "nuevos", model: "iPhone 17", storage: "256GB", color: "Sellado", battery: "100%", priceUSD: "$940", priceARS: "$1.334.800" },
+      { type: "nuevos", model: "iPhone 17 Pro", storage: "256GB", color: "Sellado", battery: "100%", priceUSD: "$1380", priceARS: "$1.959.600" },
+      { type: "nuevos", model: "iPhone 17 Pro Max", storage: "256GB", color: "Sellado", battery: "100%", priceUSD: "$1490", priceARS: "$2.115.800" }
+    ];
+
+    function renderCatalog(filter = 'usados') {
+      const list = document.getElementById('catalogList');
+      list.innerHTML = '';
+      const filtered = STOCK.filter(i => i.type === filter);
+      filtered.forEach(item => {
+        const el = document.createElement('div');
+        el.className = 'catalog-item';
+        
+        let batteryBadge = '';
+        if (item.type === 'usados') {
+          batteryBadge = `<span class="item-spec-tag">Bat. ${item.battery}</span>`;
+        }
+
+        el.innerHTML = `
+      <div>
+        <p class="item-model">${item.model}</p>
+        <div class="item-specs">
+          <span class="item-spec-tag">${item.storage}</span>
+          <span class="item-spec-tag">${item.color}</span>
+          ${batteryBadge}
+        </div>
+      </div>
+      <div>
+        <div class="item-price-col">
+          <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <span class="item-price" style="font-size: 1.2rem; font-weight: 800;">${item.priceUSD} USD</span>
+            <span class="item-price" style="font-size: 0.75rem; font-weight: 400; color: var(--grey-3); margin-top: 0.2rem;">${item.priceARS} ARS</span>
+          </div>
+        </div>
+        <button class="btn-primary" style="width: 100%; text-align: center;" onclick="openPurchaseForm('${item.model}', '${item.priceUSD}', '${item.storage}')">Comprar</button>
+      </div>
+    `;
+        list.appendChild(el);
+      });
+    }
+    renderCatalog('usados');
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        renderCatalog(this.dataset.filter);
+      });
+    });
+
+    // STEPPER
+    const TOTAL = 4;
+    function goToStep(n) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step' + n).classList.add('active');
+      for (let i = 1; i <= TOTAL; i++) document.getElementById('dot' + i).classList.toggle('done', i <= n);
+      if (n === 4) buildSummary();
+      // scrollIntoView removed
+    }
+    function nextStep(n) { if (n < TOTAL) goToStep(n + 1); }
+    function prevStep(n) { if (n > 1) goToStep(n - 1); }
+
+    function buildSummary() {
+      const model = document.getElementById('currentModel').value || 'No especificado';
+      const storage = document.getElementById('currentStorage').value || 'No especificado';
+      const battery = document.getElementById('batterySlider').value + '%';
+      const cond = document.getElementById('aestheticCondition').value || 'No especificado';
+      const notes = document.getElementById('aestheticNotes').value || '—';
+      const desired = document.getElementById('desiredModel').value || 'No especificado';
+      const box = document.getElementById('summary-box');
+      box.style.display = 'block';
+      box.innerHTML = `
+    <p style="color:var(--grey-3);letter-spacing:0.2em;font-size:0.45rem;margin-bottom:0.8rem;text-transform:uppercase;">// Resumen de tu solicitud</p>
+    Modelo actual: ${model} ${storage}<br>
+    Salud batería: ${battery}<br>
+    Condición: ${cond}<br>
+    Detalles: ${notes}<br>
+    Modelo deseado: ${desired}
+  `;
+    }
+
+    function sendToWhatsApp() {
+      const model = document.getElementById('currentModel').value || 'No especificado';
+      const storage = document.getElementById('currentStorage').value || '';
+      const battery = document.getElementById('batterySlider').value + '%';
+      const cond = document.getElementById('aestheticCondition').value || 'No especificado';
+      const notes = document.getElementById('aestheticNotes').value || '—';
+      const desired = document.getElementById('desiredModel').value || 'No especificado';
+      const name = document.getElementById('contactName').value || 'Sin nombre';
+      const msg = `*SOLICITUD DE VALORACION — iPro Center*\n\n` +
+        `Nombre: ${name}\n` +
+        `Modelo actual: ${model} ${storage}\n` +
+        `Salud bateria: ${battery}\n` +
+        `Condicion estetica: ${cond}\n` +
+        `Detalles: ${notes}\n` +
+        `Modelo deseado: ${desired}\n\n` +
+        `Solicito valoracion para plan canje.`;
+      window.open(`https://wa.me/5493515185799?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // FAQ
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // NAV MOBILE
+    function closeMenu() { document.getElementById('navLinks').classList.remove('open'); }
+    document.getElementById('menuToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+
+    // SCROLL REVEAL
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // PARALLAX & RESPONSIVE PHONES
+    document.addEventListener("DOMContentLoaded", () => {
+      const phone16 = document.querySelector('.phone-img-16');
+      const phone17 = document.querySelector('.phone-img-17');
+
+
+
+
+
+      const wrap16 = document.querySelector('.phone-wrapper-16');
+      const wrap17 = document.querySelector('.phone-wrapper-17');
+
+      document.addEventListener('mousemove', (e) => {
+        if (window.innerWidth <= 768) return; // Disable parallax on mobile
+        const x = (window.innerWidth / 2 - e.pageX) / 45;
+        const y = (window.innerHeight / 2 - e.pageY) / 45;
+
+        if (wrap16) wrap16.style.transform = `translateY(-52%) translate3d(${x}px, ${y}px, 20px) rotateY(${x / 4}deg) rotateX(${-y / 4}deg)`;
+        if (wrap17) wrap17.style.transform = `translateY(-48%) translate3d(${x * 1.5}px, ${y * 1.5}px, -20px) rotateY(${x / 2}deg) rotateX(${-y / 2}deg)`;
+      });
+    });
+  </script>
+  <div class="modal" id="wppModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeWppForm()">&times;</button>
+      <h3 style="margin-bottom: 1.5rem;">Pedir Cotización</h3>
+      <div>
+        <label class="wpp-label">Servicio Requerido</label>
+        <input type="text" id="wppService" class="wpp-input" readonly style="background:var(--surface2);">
+      </div>
+      <div>
+        <label class="wpp-label">Modelo de iPhone</label>
+        <input type="text" id="wppModel" class="wpp-input" placeholder="Ej: iPhone 13 Pro">
+      </div>
+      <div>
+        <label class="wpp-label">Detalle de Falla (opcional)</label>
+        <input type="text" id="wppIssue" class="wpp-input" placeholder="Breve descripción">
+      </div>
+      <div>
+        <label class="wpp-label">Logística</label>
+        <select id="wppLogistics" class="wpp-input">
+          <option value="Lo acerco al local">Lo acerco al local</option>
+          <option value="Necesito retiro/envío">Necesito retiro/envío</option>
+        </select>
+      </div>
+      <button class="btn-primary" style="width:100%; justify-content:center; margin-top: 1rem;"
+        onclick="sendWpp()">Enviar a WhatsApp</button>
+    </div>
+  </div>
+  <script>
+    function openWppForm(service) {
+      document.getElementById('wppService').value = service;
+      document.getElementById('wppModal').classList.add('active');
+    }
+    function closeWppForm() {
+      document.getElementById('wppModal').classList.remove('active');
+    }
+    function sendWpp() {
+      const service = document.getElementById('wppService').value;
+      const model = document.getElementById('wppModel').value || 'No especificado';
+      const issue = document.getElementById('wppIssue').value || 'Ninguno';
+      const logistics = document.getElementById('wppLogistics').value;
+      const text = `Hola! Quiero pedir una cotización para:\n*Servicio*: ${service}\n*Modelo*: ${model}\n*Falla*: ${issue}\n*Logística*: ${logistics}`;
+      window.open(`https://wa.me/5493515185799?text=${encodeURIComponent(text)}`, '_blank');
+      closeWppForm();
+    }
+
+    function openPurchaseForm(model, price, storage) {
+      document.getElementById('purchModel').value = `${model} - ${storage} - ${price}`;
+      document.getElementById('purchaseModal').classList.add('active');
+    }
+    function closePurchaseForm() {
+      document.getElementById('purchaseModal').classList.remove('active');
+    }
+    function sendPurchaseWpp() {
+      const equip = document.getElementById('purchModel').value;
+      const name = document.getElementById('purchName').value || 'Sin nombre';
+      const logis = document.getElementById('purchLogistics').value;
+      const pay = document.getElementById('purchPayment').value;
+      const text = `Hola! Quiero comprar este equipo:\n*Equipo*: ${equip}\n*Nombre*: ${name}\n*Logística*: ${logis}\n*Pago*: ${pay}`;
+      window.open(`https://wa.me/5493515185799?text=${encodeURIComponent(text)}`, '_blank');
+      closePurchaseForm();
+    }
+
+    // SMART STICKY HEADER
+    let lastScrollY = window.pageYOffset;
+    const navbar = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.pageYOffset;
+      if (currentScrollY <= 0) {
+        navbar.classList.remove('nav-hidden');
+      } else if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        navbar.classList.add('nav-hidden');
+      } else if (currentScrollY < lastScrollY) {
+        navbar.classList.remove('nav-hidden');
+      }
+      lastScrollY = currentScrollY;
+    });
+  </script>
+
+  <div class="modal" id="purchaseModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closePurchaseForm()">&times;</button>
+      <h3 style="margin-bottom: 1.5rem;">Comprar iPhone</h3>
+      <div>
+        <label class="wpp-label">Equipo</label>
+        <input type="text" id="purchModel" class="wpp-input" readonly style="background:var(--surface2);">
+      </div>
+      <div>
+        <label class="wpp-label">Tu Nombre</label>
+        <input type="text" id="purchName" class="wpp-input" placeholder="Nombre completo">
+      </div>
+      <div>
+        <label class="wpp-label">Logística</label>
+        <select id="purchLogistics" class="wpp-input">
+          <option value="Servicio puerta a puerta">Servicio puerta a puerta</option>
+          <option value="Retirar por el local">Retirar por el local</option>
+        </select>
+      </div>
+      <div>
+        <label class="wpp-label">Método de pago</label>
+        <select id="purchPayment" class="wpp-input">
+          <option value="Cuotas">Cuotas</option>
+          <option value="USD">Dólares (USD)</option>
+          <option value="Pesos">Pesos (ARS)</option>
+        </select>
+      </div>
+      <button class="btn-primary" style="width:100%; justify-content:center; margin-top: 1rem;"
+        onclick="sendPurchaseWpp()">Confirmar Compra</button>
+    </div>
+  </div>
+</body>
+
+</html>

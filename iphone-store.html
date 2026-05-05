@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIGNAL — iPhone · Venta · Reparación · Canje</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080808;
+    --white: #F5F4F0;
+    --grey-1: #1A1A1A;
+    --grey-2: #2C2C2C;
+    --grey-3: #B0B0B0;
+    --grey-4: #E0E0E0;
+    --neon: #39FF6E;
+    --neon-dim: rgba(57,255,110,0.12);
+    --neon-border: rgba(57,255,110,0.3);
+    --metallic: #B8BEC7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 120%; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Manrope', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(8,8,8,0.85);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    color: var(--white);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex; gap: 1.8rem; list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey-4);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--neon); }
+
+  /* ---- HERO ---- */
+  .hero-images-container {
+    position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 5%; overflow: visible;
+  }
+  .hero-img {
+    position: absolute; object-fit: contain;
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.6));
+    transition: transform 0.1s ease-out; will-change: transform;
+  }
+  .img-1 { right: 5%; top: 50%; margin-top: -35vh; height: 70vh; z-index: 2; }
+  .img-2 { right: 20%; top: 50%; margin-top: -30vh; height: 60vh; z-index: 1; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8)) brightness(0.85); }
+  @media (max-width: 768px) {
+    .hero-images-container { justify-content: center; padding-right: 0; opacity: 0.3; }
+    .img-1 { right: 0; height: 60vh; }
+    .img-2 { right: auto; left: 0; height: 50vh; }
+  }
+
+  #hero {
+    min-height: 100svh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 1.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 80%, rgba(57,255,110,0.04) 0%, transparent 70%),
+                radial-gradient(ellipse 100% 50% at 100% 0%, rgba(180,190,200,0.06) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+  }
+  .hero-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--neon);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.3s forwards;
+  }
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 12vw, 7rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.5s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--metallic);
+  }
+  .hero-sub {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--grey-4);
+    max-width: 30ch;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.7s forwards;
+  }
+  .hero-cta-group {
+    display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.9s forwards;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    background: var(--white);
+    color: var(--black);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+    transition: background 0.3s, color 0.3s;
+  }
+  .btn-primary:hover { background: var(--neon); color: var(--black); }
+  .btn-ghost {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--grey-4);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .btn-ghost:hover { border-color: var(--neon); color: var(--neon); }
+
+  .hero-stat-row {
+    position: absolute; top: 50%; right: 1.5rem; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 2rem; align-items: flex-end;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 1.2s forwards;
+  }
+  .stat-item { text-align: right; }
+  .stat-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.4rem;
+    color: var(--white);
+    display: block;
+  }
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.45rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--grey-3);
+    display: block;
+    margin-top: 0.2rem;
+  }
+
+  /* ---- SECTIONS SHARED ---- */
+  section { padding: 5rem 1.5rem; }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--neon);
+    margin-bottom: 2.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 2rem; height: 1px;
+    background: var(--neon);
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 8vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+  }
+
+  /* ---- DIVIDER ---- */
+  .rule { height: 1px; background: rgba(255,255,255,0.06); margin: 0 1.5rem; }
+
+  /* ---- CATALOG ---- */
+  #catalog { padding-top: 5rem; padding-bottom: 5rem; }
+  .catalog-filters {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 3rem;
+  }
+  .filter-btn {
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: transparent;
+    color: var(--grey-4);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    border-color: var(--neon);
+    color: var(--neon);
+    background: var(--neon-dim);
+  }
+  .catalog-list { display: flex; flex-direction: column; gap: 0; }
+  .catalog-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    padding: 1.8rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .catalog-item::before {
+    content: '';
+    position: absolute; left: -1.5rem; right: -1.5rem; top: 0; bottom: 0;
+    background: rgba(255,255,255,0.02);
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .catalog-item:hover::before { opacity: 1; }
+  .item-model {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.4rem;
+  }
+  .item-specs {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: var(--grey-3);
+    display: flex; flex-wrap: wrap; gap: 0.8rem;
+  }
+  .item-spec-tag {
+    padding: 0.2rem 0.5rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--metallic);
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+  }
+  .item-price-col { text-align: right; }
+  .item-price {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .item-condition {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+    padding: 0.15rem 0.4rem;
+    border: 1px solid;
+    display: inline-block;
+  }
+  .cond-A { border-color: var(--neon); color: var(--neon); }
+  .cond-B { border-color: var(--metallic); color: var(--metallic); }
+  .cond-C { border-color: var(--grey-3); color: var(--grey-3); }
+
+  /* catalog hidden */
+  .catalog-item[data-hidden="true"] { display: none; }
+
+  /* ---- TRADE-IN STEPPER ---- */
+  #canje { background: var(--grey-1); }
+  .stepper-container { margin-top: 2rem; }
+  .step { display: none; }
+  .step.active { display: block; }
+  .step-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: var(--grey-3);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .step-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    line-height: 1.1;
+  }
+  .form-field { margin-bottom: 1.5rem; }
+  .form-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey-3);
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--white);
+    padding: 0.9rem 1rem;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.3s;
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--neon);
+  }
+  .form-select option { background: var(--grey-1); color: var(--white); }
+  .form-textarea { resize: vertical; min-height: 100px; }
+
+  /* battery slider */
+  .battery-display {
+    font-family: 'Space Mono', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--neon);
+    text-align: center;
+    margin: 1rem 0 0.5rem;
+  }
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+    outline: none;
+    border-radius: 0;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px; height: 16px;
+    background: var(--neon);
+    cursor: pointer;
+    border-radius: 0;
+  }
+
+  .step-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .btn-step-back {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--grey-4);
+    padding: 0.7rem 1.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .btn-step-back:hover { border-color: var(--white); color: var(--white); }
+  .btn-step-next {
+    background: var(--white);
+    border: none;
+    color: var(--black);
+    padding: 0.85rem 2rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background 0.25s, color 0.25s;
+  }
+  .btn-step-next:hover { background: var(--neon); }
+
+  .step-progress {
+    display: flex; gap: 0.4rem; margin-bottom: 2rem;
+  }
+  .progress-dot {
+    height: 2px; flex: 1;
+    background: rgba(255,255,255,0.1);
+    transition: background 0.4s;
+  }
+  .progress-dot.done { background: var(--neon); }
+
+  /* ---- SERVICES ---- */
+  #servicios .services-grid {
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .service-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.2rem;
+    align-items: center;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .service-index {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    color: var(--grey-3);
+    width: 2rem;
+  }
+  .service-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--white);
+  }
+  .service-detail {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    color: var(--grey-3);
+    margin-top: 0.25rem;
+    letter-spacing: 0.05em;
+  }
+  .service-price {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--metallic);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* accessories */
+  .accessories-row {
+    display: flex; flex-direction: column; gap: 0; margin-top: 3.5rem;
+  }
+  .acc-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .acc-name {
+    font-size: 0.85rem;
+    color: var(--grey-4);
+    font-weight: 300;
+  }
+  .acc-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.45rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--metallic);
+    border: 1px solid rgba(184,190,199,0.3);
+    padding: 0.2rem 0.5rem;
+  }
+
+  /* ---- FAQ ---- */
+  #faq { background: var(--grey-1); }
+  .faq-list { display: flex; flex-direction: column; gap: 0; }
+  .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .faq-q {
+    width: 100%;
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 1.5rem 0;
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer;
+    gap: 1rem;
+  }
+  .faq-q-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.4;
+  }
+  .faq-icon {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    color: var(--neon);
+    flex-shrink: 0;
+    transition: transform 0.3s;
+    line-height: 1;
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+  }
+  .faq-item.open .faq-a { max-height: 300px; padding-bottom: 1.5rem; }
+  .faq-a p {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--grey-4);
+    font-weight: 300;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    padding: 4rem 1.5rem 6rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 2rem;
+    letter-spacing: 0.2em;
+    color: var(--white);
+    display: inline-block;
+    margin-bottom: 3rem;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem 1rem;
+    margin-bottom: 3rem;
+  }
+  .footer-col-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--grey-3);
+    margin-bottom: 1rem;
+  }
+  .footer-col p, .footer-col a {
+    font-size: 0.8rem;
+    color: var(--grey-4);
+    font-weight: 300;
+    line-height: 1.8;
+    display: block;
+    text-decoration: none;
+  }
+  .footer-col a:hover { color: var(--neon); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .footer-copy {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.45rem;
+    letter-spacing: 0.2em;
+    color: var(--grey-3);
+    text-transform: uppercase;
+  }
+  .footer-social a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    color: var(--grey-4);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 1px;
+  }
+  .footer-social a:hover { color: var(--neon); border-color: var(--neon); }
+
+  /* ---- WHATSAPP FLOAT ---- */
+  .wa-float {
+    position: fixed; bottom: 2rem; right: 1.5rem; z-index: 99;
+    width: 3rem; height: 3rem;
+    background: var(--black);
+    border: 1px solid var(--neon-border);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .wa-float:hover { background: var(--neon-dim); border-color: var(--neon); }
+  .wa-float svg { width: 1.3rem; height: 1.3rem; fill: var(--neon); }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ---- SCROLLBAR ---- */
+  ::-webkit-scrollbar { width: 2px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--grey-2); }
+
+  /* ---- MOBILE ONLY NAV TOGGLE ---- */
+  .menu-toggle {
+    display: none;
+    flex-direction: column; gap: 4px;
+    cursor: pointer; background: none; border: none; padding: 4px;
+  }
+  .menu-toggle span {
+    display: block; width: 22px; height: 1px; background: var(--white);
+    transition: all 0.3s;
+  }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column; gap: 1rem;
+      position: fixed; inset: 0; background: var(--black);
+      align-items: center; justify-content: center;
+      z-index: 99;
+    }
+    .nav-links.open a { font-size: 1rem; letter-spacing: 0.15em; }
+    .menu-toggle { display: flex; position: relative; z-index: 101; }
+    .hero-stat-row { display: none; }
+  }
+
+  /* whatsapp summary hidden until step 4 */
+  #summary-box { font-family: 'Space Mono', monospace; font-size: 0.65rem; line-height: 1.8; color: var(--grey-4); background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 1.2rem; margin-bottom: 1.5rem; }
+
+  /* neon glow pulse on CTA */
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(57,255,110,0); }
+    50% { box-shadow: 0 0 16px 2px rgba(57,255,110,0.25); }
+  }
+  .btn-canje-final {
+    animation: glowPulse 2.5s ease infinite;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo"><img src="LOGO.jpg" alt="Signal Logo" style="height: 60px;"></a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#catalog" onclick="closeMenu()">Catálogo</a></li>
+    <li><a href="#canje" onclick="closeMenu()">Canje</a></li>
+    <li><a href="#servicios" onclick="closeMenu()">Servicios</a></li>
+    <li><a href="#faq" onclick="closeMenu()">FAQ</a></li>
+    <li><a href="#contacto" onclick="closeMenu()">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-images-container" id="heroImages">
+    <img src="IPHONE 16 PRO.png" class="hero-img img-1" alt="iPhone 16 Pro" data-speed="0.04">
+    <img src="IPHONE 17.png" class="hero-img img-2" alt="iPhone 17" data-speed="0.02">
+  </div>
+  <div class="hero-stat-row">
+    <div class="stat-item">
+      <span class="stat-num">48h</span>
+      <span class="stat-label">Tiempo Rep.</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">+200</span>
+      <span class="stat-label">Unidades</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">A/B/C</span>
+      <span class="stat-label">Grados</span>
+    </div>
+  </div>
+  <div style="position:relative; z-index:2;">
+    <p class="hero-label">Buenos Aires / Certified Reseller</p>
+    <h1 class="hero-title">iPhone.<br><em>Adquirido</em><br>correctamente.</h1>
+    <p class="hero-sub">Venta certificada, reparación técnica y canje inteligente. Sin intermediarios. Sin margen sobre la incertidumbre.</p>
+    <div class="hero-cta-group">
+      <a href="#catalog" class="btn-primary">Ver stock disponible</a>
+      <a href="#canje" class="btn-ghost">Cotizar mi iPhone</a>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- CATALOG -->
+<section id="catalog">
+  <p class="section-label reveal">Stock disponible actualizado en tiempo real</p>
+  <h2 class="section-title reveal">Elegí tu<br><em style="font-style:italic; color: var(--metallic);">próximo iPhone.</em></h2>
+  <div class="catalog-filters reveal">
+    <button class="filter-btn active" data-filter="all">Todo</button>
+    <button class="filter-btn" data-filter="15">iPhone 15</button>
+    <button class="filter-btn" data-filter="14">iPhone 14</button>
+    <button class="filter-btn" data-filter="13">iPhone 13</button>
+    <button class="filter-btn" data-filter="12">iPhone 12</button>
+  </div>
+  <div class="catalog-list reveal" id="catalogList">
+    <!-- populated by JS -->
+  </div>
+  <p style="font-family:'Space Mono',monospace; font-size:0.5rem; letter-spacing:0.15em; color:var(--grey-3); margin-top:2rem;" class="reveal">
+    * PRECIOS EN USD. STOCK SUJETO A DISPONIBILIDAD. ACTUALIZACIÓN DIARIA.
+  </p>
+</section>
+
+<div class="rule"></div>
+
+<!-- CANJE -->
+<section id="canje">
+  <p class="section-label reveal">Plan Canje — Valoración en tiempo real</p>
+  <h2 class="section-title reveal">Tu iPhone<br><em style="font-style:italic; color:var(--metallic);">vale más</em><br>de lo que creés.</h2>
+  <p class="reveal" style="font-size:0.82rem; color:var(--grey-4); font-weight:300; line-height:1.7; max-width:38ch; margin-bottom:3rem;">
+    Completá el formulario y recibís una valoración real en menos de 24 horas. Sin sorteos. Sin letra chica.
+  </p>
+
+  <div class="stepper-container reveal">
+    <div class="step-progress">
+      <div class="progress-dot done" id="dot1"></div>
+      <div class="progress-dot" id="dot2"></div>
+      <div class="progress-dot" id="dot3"></div>
+      <div class="progress-dot" id="dot4"></div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="step active" id="step1">
+      <p class="step-num">Paso 01 / 04 — Modelo actual</p>
+      <h3 class="step-title">¿Cuál es tu iPhone actual?</h3>
+      <div class="form-field">
+        <label class="form-label" for="currentModel">Modelo</label>
+        <select class="form-select" id="currentModel">
+          <option value="">— Seleccioná tu modelo —</option>
+          <option>iPhone 7</option>
+          <option>iPhone 7 Plus</option>
+          <option>iPhone 8</option>
+          <option>iPhone 8 Plus</option>
+          <option>iPhone X</option>
+          <option>iPhone XS</option>
+          <option>iPhone XS Max</option>
+          <option>iPhone XR</option>
+          <option>iPhone 11</option>
+          <option>iPhone 11 Pro</option>
+          <option>iPhone 11 Pro Max</option>
+          <option>iPhone 12</option>
+          <option>iPhone 12 Mini</option>
+          <option>iPhone 12 Pro</option>
+          <option>iPhone 12 Pro Max</option>
+          <option>iPhone 13</option>
+          <option>iPhone 13 Mini</option>
+          <option>iPhone 13 Pro</option>
+          <option>iPhone 13 Pro Max</option>
+          <option>iPhone 14</option>
+          <option>iPhone 14 Plus</option>
+          <option>iPhone 14 Pro</option>
+          <option>iPhone 14 Pro Max</option>
+          <option>iPhone 15</option>
+          <option>iPhone 15 Plus</option>
+          <option>iPhone 15 Pro</option>
+          <option>iPhone 15 Pro Max</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="currentStorage">Almacenamiento</label>
+        <select class="form-select" id="currentStorage">
+          <option value="">— Capacidad —</option>
+          <option>64 GB</option>
+          <option>128 GB</option>
+          <option>256 GB</option>
+          <option>512 GB</option>
+          <option>1 TB</option>
+        </select>
+      </div>
+      <div class="step-nav">
+        <span></span>
+        <button class="btn-step-next" onclick="nextStep(1)">Continuar</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step" id="step2">
+      <p class="step-num">Paso 02 / 04 — Estado de batería</p>
+      <h3 class="step-title">¿Cuánta carga retiene la batería?</h3>
+      <div class="form-field">
+        <p class="form-label">Salud de batería (Ajustes → Batería)</p>
+        <div class="battery-display" id="batteryValue">85%</div>
+        <input type="range" id="batterySlider" min="60" max="100" value="85"
+          oninput="document.getElementById('batteryValue').textContent = this.value + '%'">
+        <p style="font-family:'Space Mono',monospace; font-size:0.5rem; color:var(--grey-3); margin-top:0.8rem; letter-spacing:0.1em;">
+          &gt; 85% ÓPTIMA · 75–85% ACEPTABLE · &lt; 75% REEMPLAZO RECOMENDADO
+        </p>
+      </div>
+      <div class="step-nav">
+        <button class="btn-step-back" onclick="prevStep(2)">Volver</button>
+        <button class="btn-step-next" onclick="nextStep(2)">Continuar</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step" id="step3">
+      <p class="step-num">Paso 03 / 04 — Estado estético</p>
+      <h3 class="step-title">¿Cómo está el exterior?</h3>
+      <div class="form-field">
+        <label class="form-label" for="aestheticCondition">Condición</label>
+        <select class="form-select" id="aestheticCondition">
+          <option value="">— Seleccioná —</option>
+          <option value="A">Grado A — Sin marcas visibles</option>
+          <option value="B">Grado B — Marcas leves de uso</option>
+          <option value="C">Grado C — Rayones / golpes visibles</option>
+          <option value="D">Grado D — Pantalla rota / daño severo</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="aestheticNotes">Detalles adicionales (opcional)</label>
+        <textarea class="form-textarea" id="aestheticNotes" placeholder="Describí cualquier detalle relevante: cámara, marco, botones..."></textarea>
+      </div>
+      <div class="step-nav">
+        <button class="btn-step-back" onclick="prevStep(3)">Volver</button>
+        <button class="btn-step-next" onclick="nextStep(3)">Continuar</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step" id="step4">
+      <p class="step-num">Paso 04 / 04 — iPhone deseado</p>
+      <h3 class="step-title">¿A qué modelo querés actualizar?</h3>
+      <div class="form-field">
+        <label class="form-label" for="desiredModel">Modelo deseado</label>
+        <select class="form-select" id="desiredModel">
+          <option value="">— Seleccioná —</option>
+          <option>iPhone 14</option>
+          <option>iPhone 14 Pro</option>
+          <option>iPhone 14 Pro Max</option>
+          <option>iPhone 15</option>
+          <option>iPhone 15 Plus</option>
+          <option>iPhone 15 Pro</option>
+          <option>iPhone 15 Pro Max</option>
+          <option>Todavía no lo sé</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="contactName">Tu nombre</label>
+        <input type="text" class="form-input" id="contactName" placeholder="Nombre completo">
+      </div>
+      <div id="summary-box" style="display:none;"></div>
+      <div class="step-nav">
+        <button class="btn-step-back" onclick="prevStep(4)">Volver</button>
+        <button class="btn-step-next btn-canje-final" onclick="sendToWhatsApp()" style="background: var(--neon); color: var(--black);">
+          Solicitar valoración
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- SERVICES -->
+<section id="servicios">
+  <p class="section-label reveal">Servicios — Técnicos y Accesorios</p>
+  <h2 class="section-title reveal">Reparación<br><em style="font-style:italic; color:var(--metallic);">de precisión.</em></h2>
+
+  <div class="services-grid reveal">
+    <div class="service-row">
+      <span class="service-index">01</span>
+      <div>
+        <p class="service-name">Reemplazo de batería</p>
+        <p class="service-detail">BATERÍA OEM / COMPATIBLE · ENTREGA EN 24H</p>
+      </div>
+      <span class="service-price">Desde $25</span>
+    </div>
+    <div class="service-row">
+      <span class="service-index">02</span>
+      <div>
+        <p class="service-name">Cambio de pantalla OLED</p>
+        <p class="service-detail">MÓDULO ORIGINAL · CALIBRACIÓN TÁCTIL INCLUIDA</p>
+      </div>
+      <span class="service-price">Desde $80</span>
+    </div>
+    <div class="service-row">
+      <span class="service-index">03</span>
+      <div>
+        <p class="service-name">Reparación de módulo cámara</p>
+        <p class="service-detail">LENTE / SENSOR / ESTABILIZADOR</p>
+      </div>
+      <span class="service-price">Desde $60</span>
+    </div>
+    <div class="service-row">
+      <span class="service-index">04</span>
+      <div>
+        <p class="service-name">Diagnóstico técnico integral</p>
+        <p class="service-detail">HARDWARE + SOFTWARE · INFORME DETALLADO</p>
+      </div>
+      <span class="service-price">$10</span>
+    </div>
+    <div class="service-row">
+      <span class="service-index">05</span>
+      <div>
+        <p class="service-name">Reparación conector de carga</p>
+        <p class="service-detail">LIGHTNING / USB-C · PRUEBA DE CARGA INCLUIDA</p>
+      </div>
+      <span class="service-price">Desde $35</span>
+    </div>
+    <div class="service-row">
+      <span class="service-index">06</span>
+      <div>
+        <p class="service-name">Recuperación de datos</p>
+        <p class="service-detail">BACKUP · MIGRACIÓN · ICLOUD ASSIST</p>
+      </div>
+      <span class="service-price">$20</span>
+    </div>
+  </div>
+
+  <div class="accessories-row reveal" style="margin-top:4rem;">
+    <h3 style="font-family:'DM Serif Display',serif; font-size:clamp(2rem, 5vw, 3rem); margin-bottom:2.5rem; color:var(--white); line-height: 1.1;">
+      Accesorios<br><em style="font-style:italic; color:var(--metallic);">certificados.</em>
+    </h3>
+    <div class="acc-item">
+      <span class="acc-name">Funda MagSafe — Silicona premium</span>
+      <span class="acc-badge">Stock</span>
+    </div>
+    <div class="acc-item">
+      <span class="acc-name">Vidrio templado 2.5D — Antihuella</span>
+      <span class="acc-badge">Stock</span>
+    </div>
+    <div class="acc-item">
+      <span class="acc-name">Cargador USB-C 20W — Apple original</span>
+      <span class="acc-badge">Stock</span>
+    </div>
+    <div class="acc-item">
+      <span class="acc-name">Cable USB-C a Lightning — Trenzado</span>
+      <span class="acc-badge">Stock</span>
+    </div>
+    <div class="acc-item">
+      <span class="acc-name">AirPods Pro 2da gen — Sellados</span>
+      <span class="acc-badge">Consultar</span>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- FAQ -->
+<section id="faq">
+  <p class="section-label reveal">FAQ — Preguntas frecuentes</p>
+  <h2 class="section-title reveal">Todo lo que<br><em style="font-style:italic; color:var(--metallic);">necesitás saber.</em></h2>
+
+  <div class="faq-list reveal">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Qué garantía tienen los equipos vendidos?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Todos los equipos de grado A y B incluyen 90 días de garantía sobre fallas de funcionamiento. La garantía no cubre daños físicos posteriores a la compra. Entregamos comprobante detallado con número de serie y condición al momento de la venta.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Cuánto demora una reparación?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Las reparaciones estándar (batería, pantalla, conector) se realizan en el día, generalmente entre 2 y 4 horas hábiles. Reparaciones de placa o módulos de cámara pueden demorar hasta 48 horas. Se notifica por WhatsApp cuando el equipo está listo.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Cómo funciona el plan de canje?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Completás el formulario de valoración, recibís una oferta por WhatsApp en menos de 24 horas. Si acordamos precio, traés tu equipo al local, verificamos condiciones en persona y realizamos el canje o la diferencia en efectivo o transferencia. Sin costos ocultos.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Qué métodos de pago aceptan?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Aceptamos efectivo en pesos y dólares, transferencia bancaria (CVU/CBU), Mercado Pago y criptomonedas estables (USDT). Para compras en cuotas consultá disponibilidad según el equipo.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Los equipos son libres de iCloud?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Sí. Todos los equipos del catálogo se verifican libres de iCloud antes de la venta. Podés verificarlo con tu propio Apple ID en el momento de la transacción, sin apuro.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Realizan envíos a todo el país?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Sí. Coordinamos envíos por Andreani o OCA a todo el territorio nacional. El costo lo abona el comprador. Para compras superiores a un monto acordado, el envío es bonificado. Para reparaciones, solo atendemos de forma presencial.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- FOOTER / CONTACT -->
+<footer id="contacto">
+  <span class="footer-logo reveal"><img src="LOGO.jpg" alt="Signal Logo" style="height: 120px;"></span>
+  <div class="footer-grid reveal">
+    <div class="footer-col">
+      <p class="footer-col-title">Ubicación</p>
+      <a href="https://maps.google.com" target="_blank" rel="noopener">
+        Av. Corrientes 1234<br>
+        Ciudad de Buenos Aires<br>
+        Argentina
+      </a>
+      <a href="https://maps.google.com" target="_blank" rel="noopener" style="margin-top:0.8rem; font-family:'Space Mono',monospace; font-size:0.5rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--neon);">
+        Ver en Google Maps →
+      </a>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Horarios</p>
+      <p>Lun – Vie<br><span style="color:var(--white);">10:00 – 19:00</span></p>
+      <p style="margin-top:0.6rem;">Sábados<br><span style="color:var(--white);">10:00 – 14:00</span></p>
+      <p style="margin-top:0.6rem;">Dom y feriados<br><span style="color:var(--grey-3);">Cerrado</span></p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Contacto directo</p>
+      <a href="https://wa.me/5491100000000" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://instagram.com/signal.iphone" target="_blank" rel="noopener">@signal.iphone</a>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Legal</p>
+      <p>Empresa registrada en Argentina. Todos los precios en USD. Stock sujeto a disponibilidad. CUIT disponible a solicitud.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Signal. All rights reserved.</span>
+    <div class="footer-social">
+      <a href="https://instagram.com/signal.iphone" target="_blank" rel="noopener">IG ↗</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/5491100000000" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+// ==================== CATALOG DATA ====================
+// Actualizá este array con los datos de tu planilla.
+// Si necesitás cargar desde Google Sheets, asegurate de publicar la hoja como CSV.
+const STOCK = [
+  { model: "iPhone 15 Pro Max", storage: "256 GB", color: "Titanio Natural", battery: "100%", condition: "A", price: "$1.080" },
+  { model: "iPhone 15 Pro", storage: "128 GB", color: "Titanio Negro", battery: "98%", condition: "A", price: "$950" },
+  { model: "iPhone 15", storage: "128 GB", color: "Rosa", battery: "100%", condition: "A", price: "$820" },
+  { model: "iPhone 15", storage: "256 GB", color: "Azul", battery: "97%", condition: "A", price: "$870" },
+  { model: "iPhone 14 Pro Max", storage: "256 GB", color: "Morado Profundo", battery: "92%", condition: "A", price: "$880" },
+  { model: "iPhone 14 Pro", storage: "128 GB", color: "Plata", battery: "89%", condition: "B", price: "$720" },
+  { model: "iPhone 14 Pro", storage: "256 GB", color: "Oro", battery: "94%", condition: "A", price: "$790" },
+  { model: "iPhone 14", storage: "128 GB", color: "Negro Medianoche", battery: "88%", condition: "B", price: "$560" },
+  { model: "iPhone 14 Plus", storage: "128 GB", color: "Rojo", battery: "91%", condition: "A", price: "$620" },
+  { model: "iPhone 13 Pro Max", storage: "256 GB", color: "Grafito", battery: "84%", condition: "B", price: "$680" },
+  { model: "iPhone 13 Pro", storage: "128 GB", color: "Verde Alpino", battery: "86%", condition: "B", price: "$580" },
+  { model: "iPhone 13", storage: "128 GB", color: "Blanco Estelar", battery: "82%", condition: "B", price: "$430" },
+  { model: "iPhone 13 Mini", storage: "128 GB", color: "Negro Medianoche", battery: "79%", condition: "C", price: "$360" },
+  { model: "iPhone 12 Pro Max", storage: "256 GB", color: "Plata", battery: "81%", condition: "B", price: "$470" },
+  { model: "iPhone 12 Pro", storage: "128 GB", color: "Azul Pacífico", battery: "77%", condition: "C", price: "$380" },
+  { model: "iPhone 12", storage: "64 GB", color: "Negro", battery: "75%", condition: "C", price: "$290" },
+];
+
+function renderCatalog(filter = 'all') {
+  const list = document.getElementById('catalogList');
+  list.innerHTML = '';
+  const filtered = filter === 'all' ? STOCK : STOCK.filter(i => i.model.includes('iPhone ' + filter));
+  filtered.forEach(item => {
+    const cond = item.condition;
+    const condClass = cond === 'A' ? 'cond-A' : cond === 'B' ? 'cond-B' : 'cond-C';
+    const el = document.createElement('div');
+    el.className = 'catalog-item';
+    el.innerHTML = `
+      <div>
+        <p class="item-model">${item.model}</p>
+        <div class="item-specs">
+          <span class="item-spec-tag">${item.storage}</span>
+          <span class="item-spec-tag">${item.color}</span>
+          <span class="item-spec-tag">Bat. ${item.battery}</span>
+        </div>
+      </div>
+      <div class="item-price-col">
+        <p class="item-price">${item.price}</p>
+        <span class="item-condition ${condClass}">Grado ${cond}</span>
+      </div>
+    `;
+    list.appendChild(el);
+  });
+}
+renderCatalog();
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    renderCatalog(this.dataset.filter);
+  });
+});
+
+// ==================== STEPPER ====================
+let currentStep = 1;
+const totalSteps = 4;
+
+function goToStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + n).classList.add('active');
+  for (let i = 1; i <= totalSteps; i++) {
+    const dot = document.getElementById('dot' + i);
+    dot.classList.toggle('done', i <= n);
+  }
+  currentStep = n;
+  if (n === 4) buildSummary();
+  document.getElementById('canje').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function nextStep(n) { if (n < totalSteps) goToStep(n + 1); }
+function prevStep(n) { if (n > 1) goToStep(n - 1); }
+
+function buildSummary() {
+  const model = document.getElementById('currentModel').value || 'No especificado';
+  const storage = document.getElementById('currentStorage').value || 'No especificado';
+  const battery = document.getElementById('batterySlider').value + '%';
+  const condition = document.getElementById('aestheticCondition').value || 'No especificado';
+  const notes = document.getElementById('aestheticNotes').value || '—';
+  const desired = document.getElementById('desiredModel').value || 'No especificado';
+
+  const box = document.getElementById('summary-box');
+  box.style.display = 'block';
+  box.innerHTML = `
+    <p style="color:var(--neon); letter-spacing:0.2em; font-size:0.5rem; margin-bottom:0.8rem; text-transform:uppercase;">// Resumen de tu solicitud</p>
+    Modelo actual: ${model} ${storage}<br>
+    Salud batería: ${battery}<br>
+    Condición estética: ${condition}<br>
+    Detalles: ${notes}<br>
+    Modelo deseado: ${desired}
+  `;
+}
+
+function sendToWhatsApp() {
+  const model = document.getElementById('currentModel').value || 'No especificado';
+  const storage = document.getElementById('currentStorage').value || '';
+  const battery = document.getElementById('batterySlider').value + '%';
+  const condition = document.getElementById('aestheticCondition').value || 'No especificado';
+  const notes = document.getElementById('aestheticNotes').value || '—';
+  const desired = document.getElementById('desiredModel').value || 'No especificado';
+  const name = document.getElementById('contactName').value || 'Sin nombre';
+
+  const msg = `*SOLICITUD DE VALORACIÓN — SIGNAL*\n\n` +
+    `👤 Nombre: ${name}\n` +
+    `📱 Modelo actual: ${model} ${storage}\n` +
+    `🔋 Salud batería: ${battery}\n` +
+    `🔍 Condición estética: ${condition}\n` +
+    `📝 Detalles: ${notes}\n` +
+    `🎯 Modelo deseado: ${desired}\n\n` +
+    `_Solicito valoración para plan canje._`;
+
+  const encoded = encodeURIComponent(msg);
+  window.open(`https://wa.me/5491100000000?text=${encoded}`, '_blank');
+}
+
+// ==================== FAQ ====================
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ==================== NAV MOBILE ====================
+function closeMenu() {
+  document.getElementById('navLinks').classList.remove('open');
+}
+document.getElementById('menuToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// ==================== PARALLAX HERO ====================
+document.addEventListener('mousemove', function(e) {
+  const images = document.querySelectorAll('.hero-img');
+  if (window.innerWidth < 768) return;
+  const x = (window.innerWidth - e.pageX) / 2;
+  const y = (window.innerHeight - e.pageY) / 2;
+  images.forEach(img => {
+    const speed = img.getAttribute('data-speed');
+    const xOffset = x * speed;
+    const yOffset = y * speed;
+    img.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+  });
+});
+
+// ==================== SCROLL REVEAL ====================
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>
