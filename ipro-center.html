@@ -311,12 +311,12 @@
         opacity: 0.35;
         margin-bottom: 0;
       }
-      
+
       .hero-right::after {
         content: '';
         position: absolute;
         inset: 0;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.95) 100%);
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.95) 100%);
         z-index: 3;
       }
 
@@ -471,7 +471,7 @@
       transition: border-color 0.2s, background 0.2s;
       background: var(--surface2);
     }
-    
+
     .catalog-item:hover {
       border-color: var(--white);
     }
@@ -1611,8 +1611,12 @@
     <div class="footer-grid reveal">
       <div class="footer-col">
         <p class="footer-col-title">Ubicación</p>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3405.0063266185845!2d-64.190825!3d-31.4139943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432987fb0727507%3A0xc6ebfb93a62024ce!2sGral.%20Sim%C3%B3n%20Bol%C3%ADvar%2030%2C%20X5000%20C%C3%B3rdoba!5e0!3m2!1ses-419!2sar!4v1700000000000!5m2!1ses-419!2sar" width="100%" height="180" style="border:0; border-radius: 4px; margin-bottom: 1rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <a href="https://maps.google.com/?q=Gral.+Simón+Bolívar+30,+Córdoba" target="_blank" rel="noopener" style="margin-bottom: 0.5rem; display: block;">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3405.0063266185845!2d-64.190825!3d-31.4139943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432987fb0727507%3A0xc6ebfb93a62024ce!2sGral.%20Sim%C3%B3n%20Bol%C3%ADvar%2030%2C%20X5000%20C%C3%B3rdoba!5e0!3m2!1ses-419!2sar!4v1700000000000!5m2!1ses-419!2sar"
+          width="100%" height="180" style="border:0; border-radius: 4px; margin-bottom: 1rem;" allowfullscreen=""
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <a href="https://maps.google.com/?q=Gral.+Simón+Bolívar+30,+Córdoba" target="_blank" rel="noopener"
+          style="margin-bottom: 0.5rem; display: block;">
           Gral. Simón Bolívar 30<br>X5010 Córdoba<br>Argentina
         </a>
         <a class="footer-maps-link" href="https://maps.google.com/?q=Gral.+Simón+Bolívar+30,+Córdoba" target="_blank"
@@ -1674,7 +1678,7 @@
       filtered.forEach(item => {
         const el = document.createElement('div');
         el.className = 'catalog-item';
-        
+
         let batteryBadge = '';
         if (item.type === 'usados') {
           batteryBadge = `<span class="item-spec-tag">Bat. ${item.battery}</span>`;

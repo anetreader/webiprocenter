@@ -7,6 +7,14 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       if (currentScrollY <= 0) {
@@ -27,7 +35,11 @@ export default function Navbar() {
       <a href="#hero" className="nav-logo">
         <img src="/LOGO sin fondo.png" alt="iPro Center" />
       </a>
-      <button className="menu-toggle" aria-label="Menú" onClick={() => setIsOpen(!isOpen)}>
+      <button 
+        className={`menu-toggle ${isOpen ? 'open' : ''}`} 
+        aria-label="Menú" 
+        onClick={() => setIsOpen(!isOpen)}
+      >
         <span></span><span></span><span></span>
       </button>
       <ul className={`nav-links ${isOpen ? 'open' : ''}`}>

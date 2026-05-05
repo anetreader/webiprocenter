@@ -46,15 +46,15 @@ export default function Services() {
       <section id="servicios">
         <p className="section-label reveal">Servicios — Técnicos y Accesorios</p>
         <h2 className="section-title reveal">Servicio Técnico<br /><span className="dim">Especializado.</span></h2>
-        <div className="reveal">
+        <div className="services-grid reveal">
           {SERVICES.map(s => (
-            <div key={s.idx} className="service-row" onClick={() => openWppForm(s.name)}>
-              <span className="service-index">{s.idx}</span>
-              <div>
+            <div key={s.idx} className="service-card" onClick={() => openWppForm(s.name)}>
+              <div className="service-card-info">
+                <span className="service-index">{s.idx}</span>
                 <p className="service-name">{s.name}</p>
                 <p className="service-detail">{s.detail}</p>
               </div>
-              <button className="service-action">Pedir Cotización</button>
+              <button className="service-action-btn">Pedir Cotización</button>
             </div>
           ))}
         </div>
